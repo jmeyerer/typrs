@@ -62,11 +62,15 @@
                 <p class="text-white text-xl font-semibold">Your WPM was: {{ averageWPM }} wpm</p>
             </div>
         </Transition>
-    </div>    
+    </div>   
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref, watch, onMounted } from 'vue'
+
+definePageMeta({
+    layout: 'just-body'
+});
 
 const textArr = [
     "This biographical article related to French artistic gymnastics is a stub. You can help Wikipedia by expanding it.",
@@ -127,12 +131,8 @@ const restOfWordsArray = ref(wordsArray.value.slice(1));
 let currentWordIndex = 0;
 let currentWord = wordsArray.value[0];
 
-type KeyStrokeItem = {
-    key: string,
-    time: number
-}
 
-let keyStrokeList: KeyStrokeItem[] = [];
+let keyStrokeList = [];
 let lastKeyStroke;
 const averageBetweenKeystrokes = ref(0);
 const averageWPM = ref('');
@@ -214,11 +214,11 @@ watch(textArea, async (newValue, oldValue) => {
     }
 });
 
-function isCurrentWordCorrect(input : string) : boolean {
+function isCurrentWordCorrect(input) {
     return input == currentWord.substring(0, input.length);
 }
 
-function addKeyStroke(newValue : string, oldValue : string) {
+function addKeyStroke(newValue, oldValue) {
     let newKeyStroke = Date.now();
     if(newValue.length > oldValue.length) {
         keyStrokeList.push(
@@ -238,7 +238,7 @@ function reload() {
 watch(lastWordCorrect, async (newValue, oldValue) => {
     if (newValue == true && oldValue == false)
     {
-        let average : number = 0;
+        let average = 0;
         for(let i = 1; i < keyStrokeList.length; i++) {
             average += keyStrokeList[i].time - keyStrokeList[i-1].time;
         }
@@ -251,6 +251,7 @@ watch(lastWordCorrect, async (newValue, oldValue) => {
 });
 
 </script>
+
 
 <style scoped>
 .v-enter-active,
