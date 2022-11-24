@@ -151,6 +151,36 @@ correctPartOfSentence.value.pop();
 //     return false;
 // }
 
+onMounted(() => {
+    window.addEventListener('keydown', (e) => {
+        if(e.key == 'Enter') 
+        {
+            if(textArea.value == currentWord) {
+                if(wordsArray.value[currentWordIndex+1] == null)
+                {
+                    correctPartOfSentence.value.push(currentWordBeingTyped.value);
+                    currentWordBeingTyped.value = '';
+                    textArea.value = '';
+                    lastWordCorrect.value = true;
+                    return;
+                }
+                firstWordCorrect.value = true;
+                currentWordIndex += 1;
+                currentWord = wordsArray.value[currentWordIndex];
+                
+                currentWordBeingEdited.value = restOfWordsArray.value[0];
+                restOfWordsArray.value = restOfWordsArray.value.slice(1);
+
+                correctPartOfSentence.value.push(currentWordBeingTyped.value);
+
+                currentWordBeingTyped.value = '';
+                textArea.value = '';
+                return;
+            }
+        }
+    })
+});
+
 watch(textArea, async (newValue, oldValue) => {
     // If the user deletes a character (and it isn't us setting the value of the text area back to empty)
     if(newValue.length < oldValue.length && !(newValue == '' && oldValue.charAt(oldValue.length-1) == ' '))
@@ -183,7 +213,6 @@ watch(textArea, async (newValue, oldValue) => {
         restOfWordsArray.value = restOfWordsArray.value.slice(1);
 
         correctPartOfSentence.value.push(currentWordBeingTyped.value);
-        // restOfSentence.value = restOfSentence.value.substring(1,);
 
         currentWordBeingTyped.value = '';
         textArea.value = '';
@@ -197,7 +226,6 @@ watch(textArea, async (newValue, oldValue) => {
 
         currentWordCorrect.value = true;
         currentWordBeingTyped.value = newValue;
-        // restOfSentence.value = restOfSentence.value.substring(1,);
         currentWordBeingEdited.value = currentWordBeingEdited.value.substring(1,)
 
         wordSpelledCorrectly.value = true;
@@ -208,7 +236,6 @@ watch(textArea, async (newValue, oldValue) => {
         wordSpelledCorrectly.value = false;
         currentWordCorrect.value = false;
         currentWordBeingTyped.value = newValue;
-        // restOfSentence.value = restOfSentence.value.substring(1,);
         currentWordBeingEdited.value = currentWordBeingEdited.value.substring(1,)
 
     }
