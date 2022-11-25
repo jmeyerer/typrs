@@ -3,7 +3,7 @@
     class="w-full h-full min-h-screen flex flex-col items-center justify-center bg-black transition-all duration-500 ease-in-out"
   >
     <!-- NOTE Main Splash Page -->
-    <div class="font-mono text-white text-9xl flex flex-row pb-32" id="title">
+    <div class="font-cultivemono text-white text-9xl flex flex-row pb-32" id="title">
       <span
         v-for="(letter, index) in typrsText"
         :ref="index"
@@ -12,7 +12,7 @@
         {{ letter }}
       </span>
       <span
-        class="w-min h-min font-thin scale-125 font-sans -translate-y-4 pl-3"
+        class="w-min h-min font-thin scale-125 font-sans -translate-y-4 -translate-x-8 pl-3"
         :class="{
           'blinking-line': doneTyping,
         }"
@@ -63,11 +63,11 @@ onMounted(() => {
   for (let i = 1; i <= typrsString.length; i++) {
     setTimeout(() => {
       typrsText.value += typrsString.charAt(i - 1);
-    }, i * 300);
+    }, (Math.random() * (500 - 250) + 250) * i);
   }
 });
 
-watch(typrsText, (newValue) => {
+watch(typrsText, async (newValue) => {
   if (typrsText.value == typrsString) {
     doneTyping.value = true;
     // Fade in buttons after one second
@@ -77,7 +77,24 @@ watch(typrsText, (newValue) => {
         .classList.remove("opacity-0");
     }, 1000);
   }
+  // Spelled incorrectly case!
+  if(typrsText.value != typrsString && typrsText.value.length == typrsString.length) {
+    for(let i = typrsString.length; typrsText.value != typrsString.substring(0, typrsText.value.length); i--) {
+      await sleep(200);
+      typrsText.value = typrsText.value.slice(0, i);
+    }
+    await sleep(250);
+    for(let i = typrsText.value.length; i < typrsString.length; i++)
+    {
+      await sleep(300);
+      typrsText.value += typrsString.charAt(i);
+    }
+  }
 });
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 </script>
 
 <style scoped>
@@ -95,14 +112,20 @@ watch(typrsText, (newValue) => {
 }
 
 .blinking-line {
-  animation: animate 1.25s linear infinite;
+  animation: animate 1s linear infinite;
 }
 
 @keyframes animate {
   0% {
     opacity: 0;
   }
+  30% {
+    opacity: 0;
+  }
   50% {
+    opacity: 1;
+  }
+  80% {
     opacity: 1;
   }
   100% {
