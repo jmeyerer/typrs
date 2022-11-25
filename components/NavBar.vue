@@ -13,10 +13,15 @@
     </div>
 
     <div
-        v-else
+        v-if="animateOnLoad == true"
         class="bg-white/25 w-full h-fit min-h-[2rem] flex flex-col items-center justify-center text-white font-bold z-40 inset-0 top-0 wipe-in"
     >
-      <h1 class="w-fit">THIS IS WORKING WITH THE PROP</h1>
+      <NuxtLink
+        class=""
+        to="/practice"
+      >
+        Play now
+      </NuxtLink>
     </div>
   </div>
 </template>

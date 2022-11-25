@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     },
   },
   pages: true,
+  pageTransition: {'page-fade': true },
   build: {
     postcss: {
       plugins: {
@@ -31,7 +32,7 @@ export default defineNuxtConfig({
     '~/plugins/fontawesome.js'
   ],
   css: [
-    '~/assets/style/main.css',
+    '~/assets/main.css',
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 });

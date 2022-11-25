@@ -51,7 +51,7 @@
 import { ref, watch, onMounted } from "vue";
 
 definePageMeta({
-  layout: "default-animate-navbar",
+  layout: "just-body",
 });
 
 const typrsText = ref("");
