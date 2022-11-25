@@ -15,6 +15,8 @@
     "tailwindcss": "^3.2.2"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/vue-fontawesome": "^3.0.2",
     "@nuxtjs/tailwindcss": "^6.1.3"
   }
 }

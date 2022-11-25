@@ -1,5 +1,6 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  ssr: false,
   app: {
     head: {
       title: 'typr | work in progress',
@@ -26,8 +27,12 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss"],
   buildModules: [
   ],
+  plugins: [
+    '~/plugins/fontawesome.js'
+  ],
   css: [
-    '~/assets/style/main.css'
+    '~/assets/style/main.css',
+    '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 });
   
