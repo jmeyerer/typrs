@@ -5,21 +5,27 @@
     <!-- NOTE Main Splash Page -->
     <div class="font-cultivemono text-white text-9xl flex flex-row pb-32" id="title">
       <span
+        class="tracking-widest transition-all duration-500 ease-in-out opacity-0"
+        id="typrs-text"
+      >
+        TYPRS.
+      </span>
+      <!-- <span
         v-for="(letter, index) in typrsText"
         :ref="index"
         class="tracking-widest"
         :key="index"
       >
         {{ letter }}
-      </span>
-      <span
+      </span> -->
+      <!-- <span
         class="w-min h-min font-thin scale-125 font-sans -translate-y-4 -translate-x-8 pl-3"
         :class="{
           'blinking-line': doneTyping,
         }"
       >
         |
-      </span>
+      </span> -->
     </div>
     <div
       class="flex flex-row items-center space-x-16 w-fit transition-all duration-500 ease-in-out opacity-0"
@@ -55,47 +61,61 @@ definePageMeta({
   layout: "just-body",
 });
 
-const typrsText = ref("");
-const typrsString = ref("TYPRs.");
+// const typrsText = ref("");
+// const typrsString = ref("TYPRs.");
 
-const doneTyping = ref(false);
+const doneTyping = ref(true);
+
 
 onMounted(() => {
-  for (const i = ref(1); i.value <= typrsString.value.length; i.value++) {
-    setTimeout(() => {
-      typrsText.value += typrsString.value.charAt(i.value - 1);
-    }, (Math.random() * (500 - 250) + 250) * i.value);
-  }
-});
+  setTimeout(() => {
+    document
+      .getElementById("gamemode-buttons-container")
+      .classList.remove("opacity-0");
 
-watch(typrsText, async (newValue) => {
-  if (typrsText.value == typrsString.value) {
-    doneTyping.value = true;
-    // Fade in buttons after one second
-    setTimeout(() => {
-      document
-        .getElementById("gamemode-buttons-container")
-        .classList.remove("opacity-0");
+    document
+      .getElementById("typrs-text")
+      .classList.remove("opacity-0");
     }, 1000);
-  }
-  // Spelled incorrectly case!
-  if(typrsText.value != typrsString.value && typrsText.value.length == typrsString.value.length) {
-    for(const i = ref(typrsString.value.length); typrsText.value != typrsString.value.substring(0, typrsText.value.length); i.value--) {
-      await sleep(200);
-      typrsText.value = typrsText.value.slice(0, i.value);
-    }
-    await sleep(250);
-    for(const i = ref(typrsText.value.length); i.value < typrsString.value.length; i.value++)
-    {
-      await sleep(300);
-      typrsText.value += typrsString.value.charAt(i.value);
-    }
-  }
-});
+})
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+
+// onMounted(() => {
+//   for (const i = ref(1); i.value <= typrsString.value.length; i.value++) {
+//     setTimeout(() => {
+//       typrsText.value += typrsString.value.charAt(i.value - 1);
+//     }, (Math.random() * (500 - 250) + 250) * i.value);
+//   }
+// });
+
+// watch(typrsText, async (newValue) => {
+//   if (typrsText.value == typrsString.value) {
+//     doneTyping.value = true;
+//     // Fade in buttons after one second
+//     setTimeout(() => {
+//       document
+//         .getElementById("gamemode-buttons-container")
+//         .classList.remove("opacity-0");
+//     }, 1000);
+//   }
+//   // Spelled incorrectly case!
+//   if(typrsText.value != typrsString.value && typrsText.value.length == typrsString.value.length) {
+//     for(const i = ref(typrsString.value.length); typrsText.value != typrsString.value.substring(0, typrsText.value.length); i.value--) {
+//       await sleep(200);
+//       typrsText.value = typrsText.value.slice(0, i.value);
+//     }
+//     await sleep(250);
+//     for(const i = ref(typrsText.value.length); i.value < typrsString.value.length; i.value++)
+//     {
+//       await sleep(300);
+//       typrsText.value += typrsString.value.charAt(i.value);
+//     }
+//   }
+// });
+
+// function sleep(ms) {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }
 </script>
 
 <style scoped>
