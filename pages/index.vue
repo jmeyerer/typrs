@@ -56,20 +56,20 @@ definePageMeta({
 });
 
 const typrsText = ref("");
-let typrsString = "TYPRs.";
+const typrsString = ref("TYPRs.");
 
 const doneTyping = ref(false);
 
 onMounted(() => {
-  for (let i = 1; i <= typrsString.length; i++) {
+  for (let i = 1; i <= typrsString.value.length; i++) {
     setTimeout(() => {
-      typrsText.value += typrsString.charAt(i - 1);
+      typrsText.value += typrsString.value.charAt(i - 1);
     }, (Math.random() * (500 - 250) + 250) * i);
   }
 });
 
 watch(typrsText, async (newValue) => {
-  if (typrsText.value == typrsString) {
+  if (typrsText.value == typrsString.value) {
     doneTyping.value = true;
     // Fade in buttons after one second
     setTimeout(() => {
@@ -79,16 +79,16 @@ watch(typrsText, async (newValue) => {
     }, 1000);
   }
   // Spelled incorrectly case!
-  if(typrsText.value != typrsString && typrsText.value.length == typrsString.length) {
-    for(let i = typrsString.length; typrsText.value != typrsString.substring(0, typrsText.value.length); i--) {
+  if(typrsText.value != typrsString.value && typrsText.value.length == typrsString.value.length) {
+    for(let i = typrsString.value.length; typrsText.value != typrsString.value.substring(0, typrsText.value.length); i--) {
       await sleep(200);
       typrsText.value = typrsText.value.slice(0, i);
     }
     await sleep(250);
-    for(let i = typrsText.value.length; i < typrsString.length; i++)
+    for(let i = typrsText.value.length; i < typrsString.value.length; i++)
     {
       await sleep(300);
-      typrsText.value += typrsString.charAt(i);
+      typrsText.value += typrsString.value.charAt(i);
     }
   }
 });
