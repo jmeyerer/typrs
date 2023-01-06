@@ -8,6 +8,7 @@
         v-for="(letter, index) in typrsText"
         :ref="index"
         class="tracking-widest"
+        :key="index"
       >
         {{ letter }}
       </span>
