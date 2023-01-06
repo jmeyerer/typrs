@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="mt-8 md:order-1 md:mt-0">
-                <p class="mt-8 md:mt-0 text-center text-base text-gray-400">2022, TYPRs</p>
+                <p class="mt-8 md:mt-0 text-center text-base text-gray-400">2023, TYPRs</p>
             </div>
         </div>
     </footer>
