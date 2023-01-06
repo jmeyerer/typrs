@@ -61,10 +61,10 @@ const typrsString = ref("TYPRs.");
 const doneTyping = ref(false);
 
 onMounted(() => {
-  for (let i = 1; i <= typrsString.value.length; i++) {
+  for (const i = ref(1); i.value <= typrsString.value.length; i.value++) {
     setTimeout(() => {
-      typrsText.value += typrsString.value.charAt(i - 1);
-    }, (Math.random() * (500 - 250) + 250) * i);
+      typrsText.value += typrsString.value.charAt(i.value - 1);
+    }, (Math.random() * (500 - 250) + 250) * i.value);
   }
 });
 
@@ -80,15 +80,15 @@ watch(typrsText, async (newValue) => {
   }
   // Spelled incorrectly case!
   if(typrsText.value != typrsString.value && typrsText.value.length == typrsString.value.length) {
-    for(let i = typrsString.value.length; typrsText.value != typrsString.value.substring(0, typrsText.value.length); i--) {
+    for(const i = ref(typrsString.value.length); typrsText.value != typrsString.value.substring(0, typrsText.value.length); i.value--) {
       await sleep(200);
-      typrsText.value = typrsText.value.slice(0, i);
+      typrsText.value = typrsText.value.slice(0, i.value);
     }
     await sleep(250);
-    for(let i = typrsText.value.length; i < typrsString.value.length; i++)
+    for(const i = ref(typrsText.value.length); i.value < typrsString.value.length; i.value++)
     {
       await sleep(300);
-      typrsText.value += typrsString.value.charAt(i);
+      typrsText.value += typrsString.value.charAt(i.value);
     }
   }
 });
