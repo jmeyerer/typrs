@@ -1,10 +1,14 @@
-# Nuxt 3 Minimal Starter
+# Typrs
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+Hi there! This is the public repo for the Typrs project (and website). It's a free typing game. That's about all it is right now (maybe a little less).
+
+Typrs is built on Nuxt 3, and runs as a statically generated site (if you want to get the same results as what's public).
+
+:)
 
 ## Setup
 
-Make sure to install the dependencies:
+If you want to fork this repo, make sure to install the dependencies:
 
 ```bash
 # yarn
@@ -30,13 +34,11 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+npm run generate
 ```
 
 Locally preview production build:
 
 ```bash
-npm run preview
+npm run start
 ```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
